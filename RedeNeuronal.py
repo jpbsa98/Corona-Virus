@@ -39,6 +39,7 @@ class MLP():
         self.scaler = MinMaxScaler(feature_range=(-1, 1))
         self.normalized = self.scaler.fit_transform(df)
         print(self.normalized)
+        return self.normalized,self.scaler
         
     def Denormalize(self,dfNormalized):
         pass
@@ -137,9 +138,9 @@ print(data.new_dataset)
 
 model = MLP()
 model.Build(7,1)
-model.NormalizeData(data.new_dataset)
+data_norm,scaler=model.NormalizeData(data.new_dataset)
 model.PrepareData(7)
-
+print(scaler)
 
 # In[8]:
 
@@ -149,17 +150,41 @@ model.Fit()
 
 # In[15]:
 
-
-prediction = model.Predict(model.X[-1:])
-Denormalized = np.ndarray((1,4))
-Denormalized[0][0] = -1
-Denormalized[0][1] = -1
-Denormalized[0][2] = prediction
-Denormalized[0][3] = -1
-Denormalized1 = np.transpose(Denormalized)
-value = model.scaler.inverse_transform(Denormalized)
-print(value)
-
+def forecast(model,df,timesteps,multisteps,data_norm,scaler):
+    data_norm=pd.DataFrame(data_norm)
+    input_seq=data_norm[-timesteps:].values
+    inp=input_seq[:,0]
+    
+    
+    predictions=list()
+    
+    inp = np.array(inp).astype('float32')
+    print(inp)
+    for step in range(1, multisteps+1):
+        
+        inp=inp.reshape(1,timesteps,1)
+        
+        yhat=model.Predict(inp)
+        print(yhat)
+        yhat_inversed=scaler.inverse_transform(yhat)
+        predictions.append(yhat_inversed[0][0])
+        #predictions.append(yhat[0][0])
+        inp=np.append(inp[0],yhat)
+        inp=inp[-timesteps:]
+        print(inp)
+        
+    return predictions
+print(scaler)
+prediction = forecast(model,data.new_dataset,7,3,data_norm,scaler)
+# Denormalized = np.ndarray((1,4))
+# Denormalized[0][0] = -1
+# Denormalized[0][1] = -1
+# Denormalized[0][2] = prediction
+# Denormalized[0][3] = -1
+# Denormalized1 = np.transpose(Denormalized)
+# value = model.scaler.inverse_transform(Denormalized)
+# print(value)
+print(prediction)
 
 # In[ ]:
 
