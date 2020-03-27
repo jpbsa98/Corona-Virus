@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Mar 26 16:45:08 2020
+
+@author: jpbsa
+"""
+
 #!/usr/bin/env python
 # coding: utf-8
 
@@ -16,7 +23,7 @@ confirmed_cases = pd.read_csv('Dados/time_series_2019-ncov-Confirmed.csv')
 confirmed_deaths = pd.read_csv('Dados/time_series_2019-ncov-Deaths.csv')
 confirmed_recovered = pd.read_csv('Dados/time_series_2019-ncov-Recovered.csv')
 
-
+timesteps=7
 # In[2]:
 
 
@@ -73,7 +80,7 @@ class MLP():
     '''
     def Build(self,janela,nmr_parametros):
         self.model = keras.Sequential()
-        self.model.add(keras.layers.LSTM(216, input_shape=(janela, nmr_parametros), return_sequences=True))
+        self.model.add(keras.layers.LSTM(64, input_shape=(janela, nmr_parametros), return_sequences=True))
         self.model.add(keras.layers.LSTM(128, return_sequences=True))
         self.model.add(keras.layers.LSTM(64, return_sequences=False))
         self.model.add(keras.layers.Dense(16, activation="relu", kernel_initializer="uniform"))
@@ -84,7 +91,7 @@ class MLP():
 
     def Fit(self):
         self.model.compile(loss=self.RMSE,optimizer=keras.optimizers.Adam(),metrics=['mae',self.RMSE])
-        self.history = self.model.fit(x=self.X,y=self.Y,epochs=1500,shuffle=False,verbose=True)
+        self.history = self.model.fit(x=self.X,y=self.Y,epochs=53,batch_size=7,shuffle=False,verbose=True,validation_split=0.05)
     def Predict(self,data):
         result = self.model.predict(data,verbose=True)
         return result
@@ -98,6 +105,8 @@ class Data():
     def __init__(self):
         pass
     def PreparaData(self,confirmed,deaths,recovered):
+        confirmedPortugal = confirmed[ confirmed['Country/Region'] != 'Portugal'].index
+        confirmed.drop(confirmedPortugal , inplace=True)
         confirmed = confirmed.drop(columns=['Province/State','Country/Region','Lat','Long'])
         deaths = deaths.drop(columns=['Province/State','Country/Region','Lat','Long'])
         recovered = recovered.drop(columns=['Province/State','Country/Region','Lat','Long'])
@@ -122,6 +131,7 @@ class Data():
         self.new_dataset['Total_Recovered'] = total_Recovered
         self.new_dataset['Total_Deaths'] = total_Deaths
         self.new_dataset['Days_Gone'] = total_Days
+        self.new_dataset.set_index('Days_Gone')
         pd.DataFrame.to_csv(self.new_dataset,'Dados/new_dataset.csv')
 
 
@@ -137,9 +147,9 @@ print(data.new_dataset)
 
 
 model = MLP()
-model.Build(7,1)
+model.Build(timesteps,1)
 data_norm,scaler=model.NormalizeData(data.new_dataset)
-model.PrepareData(7)
+model.PrepareData(timesteps)
 print(scaler)
 
 # In[8]:
@@ -181,7 +191,7 @@ def forecast(model,df,timesteps,multisteps,data_norm,scaler):
         
     return predictions
 print(scaler)
-prediction = forecast(model,data.new_dataset,7,10,data_norm,scaler)
+prediction = forecast(model,data.new_dataset,timesteps,10,data_norm,scaler)
 # Denormalized = np.ndarray((1,4))
 # Denormalized[0][0] = -1
 # Denormalized[0][1] = -1
