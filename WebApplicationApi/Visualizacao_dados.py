@@ -126,15 +126,15 @@ class pais():
         ax.set(xlabel='Dia', ylabel='Casos Atuais',
                title='Casos Corona Virus ' +self.country)
         ax.grid()
-        fig.savefig('Image.png')
+        fig.savefig('static/Image.png')
         #plt.show()
 
 
-data_global=Global()
+'''data_global=Global()
 
 nome="Portugal"
 pais=pais(nome)
-pais.Graficos()
+pais.Graficos()'''
 
 
 
