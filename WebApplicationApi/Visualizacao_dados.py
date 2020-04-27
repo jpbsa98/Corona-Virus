@@ -7,75 +7,45 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdate
+import matplotlib.dates as mdates
+import matplotlib.ticker as ticker
+from matplotlib.dates import DateFormatter
 
-
-# In[5]:
 
 
 df_mortes=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
 df_confirmados=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
 df_recuperados=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
 
-
-# In[7]:
-
-
 df_confirmados.head()
-
-
-# In[8]:
-
-
 df_recuperados.head()
-
-
-# In[9]:
-
-
 df_mortes=df_mortes.drop(columns=['Country/Region','Lat','Long'])
-
-
-# In[14]:
-
 
 mortes_total=df_mortes.sum()
 mortes_total.head()
 
-
-
-
-#plt.show()
-
-
-# In[11]:
-
-
 df_confirmados=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
 df_recuperados=df_recuperados.drop(columns=['Country/Region','Lat','Long'])
-
-
-# In[18]:
-
 
 confirmados_total=df_confirmados.sum()
 recuperados_total=df_recuperados.sum()
 
 
 
-
-#plt.show()
-
-
-# In[16]:
-
-#plt.show()
-
-
-# In[53]:
 class Global():
        def __init__(self):
               fig, ax = plt.subplots(figsize=(20, 10))
               ax.plot(mortes_total)
+              
+              
+              
+
+
+
+              start, end = ax.get_xlim()
+              ax.xaxis.set_ticks(np.arange(start, end, 3))
+              
               plt.xticks(rotation='vertical')
               plt.yticks(np.arange(0, max(mortes_total)+1,max(mortes_total)/10))
               ax.set(xlabel='Dia', ylabel='Mortes',
@@ -86,6 +56,8 @@ class Global():
               fig, ax = plt.subplots(figsize=(20, 10))
               ax.plot(confirmados_total,label='Confirmados')
               ax.plot(recuperados_total,label='Recupeados')
+              start, end = ax.get_xlim()
+              ax.xaxis.set_ticks(np.arange(start, end, 3))
               ax.legend(fancybox=True, framealpha=1, shadow=True, borderpad=1,fontsize='15')
               plt.xticks(rotation='vertical')
               plt.yticks(np.arange(0, max(confirmados_total)+1, max(confirmados_total)/10))
@@ -99,6 +71,8 @@ class Global():
               CasosAtuais=confirmados_total-recuperados_total-mortes_total
               fig, ax = plt.subplots(figsize=(20, 10))
               ax.plot(CasosAtuais)
+              start, end = ax.get_xlim()
+              ax.xaxis.set_ticks(np.arange(start, end, 3))
               plt.xticks(rotation='vertical')
               plt.yticks(np.arange(0, max(CasosAtuais)+1, max(CasosAtuais)/10))
               ax.set(xlabel='Dia', ylabel='CasosAtuais',
@@ -146,6 +120,8 @@ class pais():
         ax.plot(self.pais_mortes,label="Mortes")
         ax.plot(self.pais_total,label="Total")
         ax.legend(fancybox=True, framealpha=1, shadow=True, borderpad=1,fontsize='15')
+        start, end = ax.get_xlim()
+        ax.xaxis.set_ticks(np.arange(start, end, 3))
         plt.xticks(rotation='vertical')
         ax.set(xlabel='Dia', ylabel='Casos Atuais',
                title='Casos Corona Virus ' +self.country)
@@ -154,10 +130,12 @@ class pais():
         #plt.show()
 
 
-# In[54]:
+data_global=Global()
 
+nome="Portugal"
+pais=pais(nome)
+pais.Graficos()
 
-# In[ ]:
 
 
 
