@@ -14,6 +14,7 @@ from matplotlib.dates import DateFormatter
 
 
 
+
 df_mortes=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
 df_confirmados=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
 df_recuperados=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
@@ -36,24 +37,30 @@ recuperados_total=df_recuperados.sum()
 class Global():
        def __init__(self):
               fig, ax = plt.subplots(figsize=(20, 10))
+              fig.suptitle('Mortes Corona Virus', fontsize=30, fontweight='bold')
+              plt.xlabel('Dia', fontsize=20)
+              plt.ylabel('Mortes', fontsize=20)
+              
               ax.plot(mortes_total)
               
-              
-              
-
-
-
               start, end = ax.get_xlim()
               ax.xaxis.set_ticks(np.arange(start, end, 3))
               
               plt.xticks(rotation='vertical')
               plt.yticks(np.arange(0, max(mortes_total)+1,max(mortes_total)/10))
-              ax.set(xlabel='Dia', ylabel='Mortes',
-                     title='Mortes Corona Virus')
+              
               ax.grid()
               fig.savefig('static/Deaths_Global.png')
 
+              
+
+
               fig, ax = plt.subplots(figsize=(20, 10))
+              fig.suptitle('Contaminados vs Recuperados', fontsize=30, fontweight='bold')
+              plt.xlabel('Dia', fontsize=20)
+              plt.ylabel('Casos', fontsize=20)
+              
+              
               ax.plot(confirmados_total,label='Confirmados')
               ax.plot(recuperados_total,label='Recupeados')
               start, end = ax.get_xlim()
@@ -61,22 +68,24 @@ class Global():
               ax.legend(fancybox=True, framealpha=1, shadow=True, borderpad=1,fontsize='15')
               plt.xticks(rotation='vertical')
               plt.yticks(np.arange(0, max(confirmados_total)+1, max(confirmados_total)/10))
-              ax.set(xlabel='Dia',
-                     ylabel='Casos',
-                     title='Contaminados vs Recuperados')
+              
               ax.grid()
               fig.savefig('static/Total.png')
 
 
               CasosAtuais=confirmados_total-recuperados_total-mortes_total
               fig, ax = plt.subplots(figsize=(20, 10))
+              
+              fig.suptitle('Casos Existentes', fontsize=30, fontweight='bold')
+              plt.xlabel('Dia', fontsize=20)
+              plt.ylabel('CasosAtuais', fontsize=20)
+              
               ax.plot(CasosAtuais)
               start, end = ax.get_xlim()
               ax.xaxis.set_ticks(np.arange(start, end, 3))
               plt.xticks(rotation='vertical')
               plt.yticks(np.arange(0, max(CasosAtuais)+1, max(CasosAtuais)/10))
-              ax.set(xlabel='Dia', ylabel='CasosAtuais',
-                     title='Casos Existentes')
+              
               ax.grid()
               fig.savefig('static/Activos.png')
 
@@ -115,6 +124,9 @@ class pais():
     def Graficos(self):
 
         fig, ax = plt.subplots(figsize=(20, 10))
+        fig.suptitle('Casos Corona Virus'+self.country, fontsize=30, fontweight='bold')
+        plt.xlabel('Dia', fontsize=20)
+        plt.ylabel('Casos Atuais', fontsize=20)
         ax.plot(self.pais_ativos,label="Ativos")
         ax.plot(self.pais_recuperados,label="Recuperados")
         ax.plot(self.pais_mortes,label="Mortes")
@@ -123,8 +135,7 @@ class pais():
         start, end = ax.get_xlim()
         ax.xaxis.set_ticks(np.arange(start, end, 3))
         plt.xticks(rotation='vertical')
-        ax.set(xlabel='Dia', ylabel='Casos Atuais',
-               title='Casos Corona Virus ' +self.country)
+        
         ax.grid()
         fig.savefig('static/Image.png')
         #plt.show()
