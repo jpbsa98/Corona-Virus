@@ -23,7 +23,7 @@ confirmed_cases = pd.read_csv('Dados/time_series_2019-ncov-Confirmed.csv')
 confirmed_deaths = pd.read_csv('Dados/time_series_2019-ncov-Deaths.csv')
 confirmed_recovered = pd.read_csv('Dados/time_series_2019-ncov-Recovered.csv')
 
-timesteps=7
+timesteps=5
 # In[2]:
 
 
@@ -65,10 +65,6 @@ class MLP():
             i+=1
         self.X = np.array(self.X)
         self.Y = np.array(self.Y)
-        print(self.X)
-        X = self.X
-        print(self.Y)
-        Y=self.Y
     
     '''
     def Prepare_Data(self,dataset):
@@ -80,11 +76,11 @@ class MLP():
     '''
     def Build(self,janela,nmr_parametros):
         self.model = keras.Sequential()
-        self.model.add(keras.layers.LSTM(64, input_shape=(janela, nmr_parametros), return_sequences=True))
+        self.model.add(keras.layers.LSTM(512, input_shape=(janela, nmr_parametros), return_sequences=True))
         self.model.add(keras.layers.LSTM(128, return_sequences=True))
         self.model.add(keras.layers.LSTM(64, return_sequences=False))
         self.model.add(keras.layers.Dense(16, activation="relu", kernel_initializer="uniform"))
-        self.model.add(keras.layers.Dense(1, activation="linear"))
+        self.model.add(keras.layers.Dense(1, activation="softmax"))
                        
     def RMSE(self,y_true,y_pred):
         return tf.cast(keras.backend.sqrt(keras.backend.mean(keras.backend.square(y_pred - y_true))),tf.float32)
@@ -105,7 +101,7 @@ class Data():
     def __init__(self):
         pass
     def PreparaData(self,confirmed,deaths,recovered):
-        confirmedPortugal = confirmed[ confirmed['Country/Region'] != 'Portugal'].index
+        confirmedPortugal = confirmed[ confirmed['Country/Region'] != 'Italy'].index
         confirmed.drop(confirmedPortugal , inplace=True)
         confirmed = confirmed.drop(columns=['Province/State','Country/Region','Lat','Long'])
         deaths = deaths.drop(columns=['Province/State','Country/Region','Lat','Long'])
@@ -187,7 +183,7 @@ def forecast(model,df,timesteps,multisteps,data_norm,scaler):
         #predictions.append(yhat[0][0])
         inp=np.append(inp[0],yhat)
         inp=inp[-timesteps:]
-        #print(inp)
+        print(inp)
         
     return predictions
 print(scaler)

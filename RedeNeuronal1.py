@@ -3,17 +3,19 @@
 
 # In[1]:
 
+#import os
+#os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-import keras
+from tensorflow import keras
 from datetime import datetime as dt
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
-confirmed_cases = pd.read_csv('Dados/time_series_2019-ncov-Confirmed.csv')
-confirmed_deaths = pd.read_csv('Dados/time_series_2019-ncov-Deaths.csv')
-confirmed_recovered = pd.read_csv('Dados/time_series_2019-ncov-Recovered.csv')
+confirmed_cases = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
+confirmed_deaths = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
+confirmed_recovered = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
 
 
 # In[2]:
@@ -79,11 +81,11 @@ class MLP():
         self.model.add(keras.layers.Dense(1, activation="linear"))
                        
     def RMSE(self,y_true,y_pred):
-        return tf.cast(keras.backend.sqrt(keras.backend.mean(keras.backend.square(y_pred - y_true))),tf.float32)
+        return keras.backend.sqrt(keras.backend.mean(keras.backend.square(y_pred - y_true)))
 
     def Fit(self):
         self.model.compile(loss=self.RMSE,optimizer=keras.optimizers.Adam(),metrics=['mae',self.RMSE])
-        self.history = self.model.fit(x=self.X,y=self.Y,epochs=1500,shuffle=False,verbose=True)
+        self.history = self.model.fit(x=self.X,y=self.Y,epochs=150,shuffle=False,verbose=True)
     def Predict(self,data):
         result = self.model.predict(data,verbose=True)
         return result
