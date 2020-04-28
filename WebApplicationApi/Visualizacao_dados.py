@@ -170,7 +170,7 @@ class pais():
     def Graficos(self):
 
         fig, ax = plt.subplots(figsize=(20, 10))
-        fig.suptitle('Casos Corona Virus'+self.country, fontsize=30, fontweight='bold')
+        fig.suptitle('Casos Corona Virus '+self.country, fontsize=30, fontweight='bold')
         plt.xlabel('Dia', fontsize=20)
         plt.ylabel('Casos Atuais', fontsize=20)
         ax.plot(self.pais_ativos,label="Ativos")
