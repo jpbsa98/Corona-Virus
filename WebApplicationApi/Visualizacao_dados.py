@@ -206,6 +206,7 @@ class pais():
         plt.xlabel('Dia', fontsize=10)
         plt.ylabel('Casos Por Dia', fontsize=10)
         
+<<<<<<< HEAD
         df_values=pd.DataFrame(lista_values)
         df_values.index=self.pais_total.index
         ax.bar(self.pais_total.index,df_values[:][0])
@@ -214,6 +215,15 @@ class pais():
         plt.xticks(rotation='vertical')
         ax.grid()
         fig.savefig('static/Casos_diarios.png')
+=======
+        plt.xlabel('Dia', fontsize=20)
+        plt.ylabel('Casos Por Dia', fontsize=20)
+        print(self.pais_total)
+        #ax.bar(self.pais_total)
+        start, end = ax.get_xlim()
+        ax.xaxis.set_ticks(np.arange(start, end, 3))
+        plt.xticks(rotation='vertical')
+>>>>>>> e797550071ed25f0ac29c1144d3f567811b551bb
         #plt.show()
 
 
