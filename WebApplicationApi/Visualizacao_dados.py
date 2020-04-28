@@ -31,7 +31,7 @@ confirmados_total=df_confirmados.sum()
 recuperados_total=df_recuperados.sum()
 
 def grafico_pizza(df):
-    #df=df.drop(['Province/State', 'Lat', 'Long'], axis=1).groupby('Country/Region').sum()
+    df=df.drop(['Province/State', 'Lat', 'Long'], axis=1).groupby('Country/Region').sum()
     df2 = df[df.columns[-1]]
     
     df_index=[]
@@ -39,8 +39,8 @@ def grafico_pizza(df):
     df3=pd.DataFrame()
     print(df2)
     
-    #df_total=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
-    confirmados_total=df_confirmados.sum()
+    df_total=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
+    confirmados_total=df_total.sum()
     confirmados_total=max(confirmados_total)
     
     df2=df2.to_frame()
@@ -73,7 +73,7 @@ def grafico_pizza(df):
     fig1.savefig('static/pizza.png')
     #plt.show()
     
-#grafico_pizza(df_confirmados)
+grafico_pizza(df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
 
 
 
