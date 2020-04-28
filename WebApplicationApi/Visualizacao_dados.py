@@ -19,19 +19,19 @@ df_recuperados=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COV
 
 df_confirmados.head()
 df_recuperados.head()
-#df_mortes=df_mortes.drop(columns=['Country/Region','Lat','Long'])
+df_mortes=df_mortes.drop(columns=['Country/Region','Lat','Long'])
 
 mortes_total=df_mortes.sum()
 mortes_total.head()
 
-#df_confirmados=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
-#df_recuperados=df_recuperados.drop(columns=['Country/Region','Lat','Long'])
+df_confirmados=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
+df_recuperados=df_recuperados.drop(columns=['Country/Region','Lat','Long'])
 
 confirmados_total=df_confirmados.sum()
 recuperados_total=df_recuperados.sum()
 
 def grafico_pizza(df):
-    df=df.drop(['Province/State', 'Lat', 'Long'], axis=1).groupby('Country/Region').sum()
+    #df=df.drop(['Province/State', 'Lat', 'Long'], axis=1).groupby('Country/Region').sum()
     df2 = df[df.columns[-1]]
     
     df_index=[]
@@ -39,8 +39,8 @@ def grafico_pizza(df):
     df3=pd.DataFrame()
     print(df2)
     
-    df_total=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
-    confirmados_total=df_total.sum()
+    #df_total=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
+    confirmados_total=df_confirmados.sum()
     confirmados_total=max(confirmados_total)
     
     df2=df2.to_frame()
@@ -70,9 +70,10 @@ def grafico_pizza(df):
     fig1.suptitle('Percentagem casos por país', fontsize=15, color='#0c3c6e')
     ax1.pie(dftops['Percentagem'], labels=dftops['Pais'],colors=colors,autopct='%1.1f%%', shadow=True)
     ax1.axis('equal')
-    plt.show()
+    fig1.savefig('static/pizza.png')
+    #plt.show()
     
-grafico_pizza(df_confirmados)
+#grafico_pizza(df_confirmados)
 
 
 
