@@ -194,11 +194,11 @@ class pais():
         plt.xlabel('Dia', fontsize=20)
         plt.ylabel('Casos Por Dia', fontsize=20)
         print(self.pais_total)
-        ax.bar(self.pais_total)
+        #ax.bar(self.pais_total)
         start, end = ax.get_xlim()
         ax.xaxis.set_ticks(np.arange(start, end, 3))
         plt.xticks(rotation='vertical')
-        plt.show()
+        #plt.show()
 
 
 '''data_global=Global()
