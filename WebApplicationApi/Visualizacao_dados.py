@@ -78,8 +78,8 @@ def grafico_pizza(df):
     #plt.show()
     return df_index
     
-paises=grafico_pizza(df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
-print(paises)
+#paises=grafico_pizza(df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
+#print(paises)
 
 
 class Global():
@@ -189,25 +189,41 @@ class pais():
         fig.savefig('static/Activos.png')
         #plt.show()
         
-        fig, ax = plt.subplots(figsize=(20, 10))
         
-        plt.xlabel('Dia', fontsize=20)
-        plt.ylabel('Casos Por Dia', fontsize=20)
-        print(self.pais_total)
-        ax.bar(self.pais_total)
+        
+        self.pais_total=self.pais_total.to_frame()
+        lista_values=[]
+        
+        for index, row in self.pais_total.iterrows():
+            '''print('total',row)
+            print('DIA',row-sum(lista_values))
+            print('-----------')'''
+            lista_values.append(int(row-sum(lista_values)))
+            
+        fig, ax = plt.subplots(figsize=(20, 10))
+        fig.suptitle('Casos Corona Virus por dia em  '+self.country, fontsize=15, color='#0c3c6e')
+
+        plt.xlabel('Dia', fontsize=10)
+        plt.ylabel('Casos Por Dia', fontsize=10)
+        
+        df_values=pd.DataFrame(lista_values)
+        df_values.index=self.pais_total.index
+        ax.bar(self.pais_total.index,df_values[:][0])
         start, end = ax.get_xlim()
         ax.xaxis.set_ticks(np.arange(start, end, 3))
         plt.xticks(rotation='vertical')
-        plt.show()
+        ax.grid()
+        fig.savefig('static/Casos_diarios.png')
+        #plt.show()
 
 
 '''data_global=Global()
-
+'''
 nome="Portugal"
 pais=pais(nome)
 pais.Graficos()
 
-'''
+
 
 
 
