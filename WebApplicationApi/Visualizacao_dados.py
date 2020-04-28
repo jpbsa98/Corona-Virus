@@ -30,6 +30,8 @@ df_recuperados=df_recuperados.drop(columns=['Country/Region','Lat','Long'])
 confirmados_total=df_confirmados.sum()
 recuperados_total=df_recuperados.sum()
 
+paises=[]
+
 def grafico_pizza(df):
     df=df.drop(['Province/State', 'Lat', 'Long'], axis=1).groupby('Country/Region').sum()
     df2 = df[df.columns[-1]]
@@ -51,6 +53,7 @@ def grafico_pizza(df):
         
         df_index.append(index)
         df_value.append(format(((row[0]/confirmados_total)*100),'.2f'))
+    
     df3['Pais']=df_index
     df3['Percentagem']=df_value
     df3['Percentagem'] = df3['Percentagem'].astype(float)
@@ -73,9 +76,10 @@ def grafico_pizza(df):
     ax1.axis('equal')
     fig1.savefig('static/pizza.png')
     #plt.show()
+    return df_index
     
-#grafico_pizza(df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
-
+paises=grafico_pizza(df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
+print(paises)
 
 
 class Global():
@@ -181,19 +185,29 @@ class pais():
         start, end = ax.get_xlim()
         ax.xaxis.set_ticks(np.arange(start, end, 3))
         plt.xticks(rotation='vertical')
-        
         ax.grid()
         fig.savefig('static/Activos.png')
         #plt.show()
+        
+        fig, ax = plt.subplots(figsize=(20, 10))
+        
+        plt.xlabel('Dia', fontsize=20)
+        plt.ylabel('Casos Por Dia', fontsize=20)
+        print(self.pais_total)
+        ax.bar(self.pais_total)
+        start, end = ax.get_xlim()
+        ax.xaxis.set_ticks(np.arange(start, end, 3))
+        plt.xticks(rotation='vertical')
+        plt.show()
 
 
 '''data_global=Global()
 
 nome="Portugal"
 pais=pais(nome)
-pais.Graficos()'''
+pais.Graficos()
 
-
+'''
 
 
 
