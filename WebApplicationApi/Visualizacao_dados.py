@@ -137,7 +137,7 @@ class pais():
         plt.xticks(rotation='vertical')
         
         ax.grid()
-        fig.savefig('static/Image.png')
+        fig.savefig('static/Activos.png')
         #plt.show()
 
 
