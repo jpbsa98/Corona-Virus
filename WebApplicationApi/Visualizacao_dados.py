@@ -7,10 +7,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdate
-import matplotlib.dates as mdates
-import matplotlib.ticker as ticker
-from matplotlib.dates import DateFormatter
+import seaborn as sns
+
 
 
 
@@ -21,16 +19,60 @@ df_recuperados=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COV
 
 df_confirmados.head()
 df_recuperados.head()
-df_mortes=df_mortes.drop(columns=['Country/Region','Lat','Long'])
+#df_mortes=df_mortes.drop(columns=['Country/Region','Lat','Long'])
 
 mortes_total=df_mortes.sum()
 mortes_total.head()
 
-df_confirmados=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
-df_recuperados=df_recuperados.drop(columns=['Country/Region','Lat','Long'])
+#df_confirmados=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
+#df_recuperados=df_recuperados.drop(columns=['Country/Region','Lat','Long'])
 
 confirmados_total=df_confirmados.sum()
 recuperados_total=df_recuperados.sum()
+
+def grafico_pizza(df):
+    df=df.drop(['Province/State', 'Lat', 'Long'], axis=1).groupby('Country/Region').sum()
+    df2 = df[df.columns[-1]]
+    
+    df_index=[]
+    df_value=[]
+    df3=pd.DataFrame()
+    print(df2)
+    
+    df_total=df_confirmados.drop(columns=['Country/Region','Lat','Long'])
+    confirmados_total=df_total.sum()
+    confirmados_total=max(confirmados_total)
+    
+    df2=df2.to_frame()
+    
+    for index, row in df2.iterrows():
+        #print(index,(row[0]/confirmados_total)*100)
+        
+        df_index.append(index)
+        df_value.append(format(((row[0]/confirmados_total)*100),'.2f'))
+    df3['Pais']=df_index
+    df3['Percentagem']=df_value
+    df3['Percentagem'] = df3['Percentagem'].astype(float)
+    df3=df3.sort_values(by=['Percentagem'],ascending=False)
+    dftops=df3[:6]
+    
+    Total = df3['Percentagem'][6:].sum()
+    d = {'Pais': ["Outros"], 'Percentagem': [Total]}
+    dfoutros = pd.DataFrame(data=d)
+
+    dftops=dftops.append(dfoutros)
+    dftops=dftops.sort_values(by=['Percentagem'],ascending=False)
+  
+    print(dftops['Percentagem'].sum())
+    #colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99','#ff6666','#c2c2f0','#ffb3e6']
+    colors =sns.color_palette("Blues",7)
+    fig1, ax1 = plt.subplots()
+    fig1.suptitle('Percentagem casos por país', fontsize=15, color='#0c3c6e')
+    ax1.pie(dftops['Percentagem'], labels=dftops['Pais'],colors=colors,autopct='%1.1f%%', shadow=True)
+    ax1.axis('equal')
+    plt.show()
+    
+grafico_pizza(df_confirmados)
 
 
 
@@ -44,10 +86,12 @@ class Global():
               ax.plot(mortes_total)
               
               start, end = ax.get_xlim()
+              
               ax.xaxis.set_ticks(np.arange(start, end, 3))
               
-              plt.xticks(rotation='vertical')
-              plt.yticks(np.arange(0, max(mortes_total)+1,max(mortes_total)/10))
+              
+              plt.xticks(rotation='vertical',fontsize=16)
+              plt.yticks(np.arange(0, max(mortes_total)+1,max(mortes_total)/10),fontsize=16)
               
               ax.grid()
               fig.savefig('static/Deaths_Global.png')
@@ -78,13 +122,13 @@ class Global():
               
               fig.suptitle('Casos Existentes', fontsize=30, fontweight='bold')
               plt.xlabel('Dia', fontsize=20)
-              plt.ylabel('CasosAtuais', fontsize=20)
+              plt.ylabel('Casos Atuais', fontsize=20)
               
               ax.plot(CasosAtuais)
               start, end = ax.get_xlim()
               ax.xaxis.set_ticks(np.arange(start, end, 3))
-              plt.xticks(rotation='vertical')
-              plt.yticks(np.arange(0, max(CasosAtuais)+1, max(CasosAtuais)/10))
+              plt.xticks(rotation='vertical',fontsize=16)
+              plt.yticks(np.arange(0, max(CasosAtuais)+1, max(CasosAtuais)/10),fontsize=16)
               
               ax.grid()
               fig.savefig('static/Activos.png')
