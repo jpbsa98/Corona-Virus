@@ -202,7 +202,7 @@ plt.xlabel('Days')
 plt.ylabel('Confirmed Cases')
 #plt.axis([1000,1250,10,25])
 plt.legend()
-plt.show();
+plt.show()
 
 # In[ ]:
 

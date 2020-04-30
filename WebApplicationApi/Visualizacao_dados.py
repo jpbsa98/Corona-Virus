@@ -39,11 +39,11 @@ def grafico_pizza(df):
     df_index=[]
     df_value=[]
     df3=pd.DataFrame()
-    print(df2)
+    #print(df2)
     
     #df_total=df.drop(columns=['Country/Region','Lat','Long'])
     confirmados_total=df2.sum()
-    print(confirmados_total)
+    #print(confirmados_total)
     #confirmados_total=max(confirmados_total)
     
     df2=df2.to_frame()
@@ -67,7 +67,7 @@ def grafico_pizza(df):
     dftops=dftops.append(dfoutros)
     dftops=dftops.sort_values(by=['Percentagem'],ascending=False)
   
-    print(dftops['Percentagem'].sum())
+    #print(dftops['Percentagem'].sum())
     #colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99','#ff6666','#c2c2f0','#ffb3e6']
     colors =sns.color_palette("Blues",7)
     fig1, ax1 = plt.subplots()
@@ -78,7 +78,7 @@ def grafico_pizza(df):
     #plt.show()
     return df_index
     
-#paises=grafico_pizza(df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
+paises=grafico_pizza(df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
 #print(paises)
 
 
@@ -190,7 +190,7 @@ class pais():
         #plt.show()
         
         
-        
+        self.total = self.pais_total
         self.pais_total=self.pais_total.to_frame()
         lista_values=[]
         
