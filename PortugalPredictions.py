@@ -99,7 +99,7 @@ class MLP():
 
 class Data():
     def __init__(self):
-        pass
+        self.PreparaData
     def PreparaData(self,confirmed,deaths,recovered):
         confirmedPortugal = confirmed[ confirmed['Country/Region'] != 'Italy'].index
         confirmed.drop(confirmedPortugal , inplace=True)
