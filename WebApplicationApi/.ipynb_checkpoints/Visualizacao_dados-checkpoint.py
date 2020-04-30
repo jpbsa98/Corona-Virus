@@ -193,12 +193,12 @@ class pais():
         self.total = self.pais_total
         self.pais_total=self.pais_total.to_frame()
         lista_values=[]
-        lista_index=[]
         
         for index, row in self.pais_total.iterrows():
-            if row.sum()>0:
-                lista_values.append(int(row-sum(lista_values)))
-                lista_index.append(index)
+            '''print('total',row)
+            print('DIA',row-sum(lista_values))
+            print('-----------')'''
+            lista_values.append(int(row-sum(lista_values)))
             
         fig, ax = plt.subplots(figsize=(20, 10))
         fig.suptitle('Casos Corona Virus por dia em  '+self.country, fontsize=15, color='#0c3c6e')
@@ -207,12 +207,9 @@ class pais():
         plt.ylabel('Casos Por Dia', fontsize=10)
         
 
-        df_values=pd.DataFrame(index=lista_index)
-        
-        df_values['CasosDiarios']=lista_values
-        #print(df_values)
-        #df_values.index=self.pais_total.index
-        ax.bar(df_values.index,df_values[:]['CasosDiarios'])
+        df_values=pd.DataFrame(lista_values)
+        df_values.index=self.pais_total.index
+        ax.bar(self.pais_total.index,df_values[:][0])
         start, end = ax.get_xlim()
         ax.xaxis.set_ticks(np.arange(start, end, 3))
         plt.xticks(rotation='vertical')
