@@ -38,9 +38,9 @@ Toda a base de dados foi obtida no seguinte github:
 
 Os csv&#39;s utilizados foram:
 
-- [Casos](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv) confirmados a nível global
-- Mortes confirmadas a nível global
-- Recuperados confirmados a nível global
+- [Dataset dos Casos confirmados a nível global](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv) 
+- [Mortes confirmadas a nível global](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv)
+- [Recuperados confirmados a nível global](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv)
 
 # Análise dos dados
 
