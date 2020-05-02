@@ -44,11 +44,15 @@ Os csv&#39;s utilizados foram:
 
 # Análise dos dados
 
+- [Análise dos dados](https://github.com/jpbsa98/Corona-Virus/blob/master/DataAnalysisNotebook.ipynb)
+
 # Preparação dos dados
 
-# Construção do modelo LSTM
+- [Preparação dos dados](https://github.com/jpbsa98/Corona-Virus/blob/master/LstmPredictionsNotebook.ipynb)
 
-# Visualização dos resultados
+# Construção do modelo LSTM e Visualização dos resultados
+
+- [Contrução do modelo e visualização de resultados](https://github.com/jpbsa98/Corona-Virus/blob/master/LstmPredictionsNotebook.ipynb)
 
 # Corona Alert(Web Site)
 
@@ -65,7 +69,7 @@ Os csv&#39;s utilizados foram:
 - conda install random
 - conda install Flask
 - conda install seaborn
-
+- conda install sklearn
 #### 2. Adicionar o projeto ao Flask
 
 ##### 2.1. Windows
