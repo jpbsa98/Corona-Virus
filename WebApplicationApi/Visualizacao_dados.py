@@ -110,7 +110,7 @@ class Global():
               plt.xlabel('Dia', fontsize=20)
               plt.ylabel('Casos', fontsize=20)
               
-              
+              confirmados_total=df_confirmados.sum()
               ax.plot(confirmados_total,label='Confirmados')
               ax.plot(recuperados_total,label='Recupeados')
               start, end = ax.get_xlim()
@@ -122,22 +122,57 @@ class Global():
               ax.grid()
               fig.savefig('static/Total.png')
 
-
+              #GRAFICO VISÃO GLOBAL
               CasosAtuais=confirmados_total-recuperados_total-mortes_total
               fig, ax = plt.subplots(figsize=(20, 10))
               
-              fig.suptitle('Casos Existentes', fontsize=30, fontweight='bold')
+              fig.suptitle('Visão Global', fontweight='bold',fontsize=15, color='#0c3c6e')
               plt.xlabel('Dia', fontsize=20)
               plt.ylabel('Casos Atuais', fontsize=20)
               
-              ax.plot(CasosAtuais)
+              ax.plot(CasosAtuais,label="Ativos")
+              ax.plot(confirmados_total,label='Confirmados')
+              ax.plot(recuperados_total,label='Recupeados')
+              ax.plot(mortes_total,label="Mortes")
+              ax.legend(fancybox=True, framealpha=1, shadow=True, borderpad=1,fontsize='15')
               start, end = ax.get_xlim()
               ax.xaxis.set_ticks(np.arange(start, end, 3))
               plt.xticks(rotation='vertical',fontsize=16)
-              plt.yticks(np.arange(0, max(CasosAtuais)+1, max(CasosAtuais)/10),fontsize=16)
+              plt.yticks(np.arange(0, max(confirmados_total)+1, max(confirmados_total)/10),fontsize=16)
               
               ax.grid()
               fig.savefig('static/Activos.png')
+              
+              
+              #CASOS DIARIOS GLOBAL
+              total = confirmados_total
+              confirmados_total=confirmados_total.to_frame()
+              lista_values=[]
+              lista_index=[]
+            
+              for index, row in confirmados_total.iterrows():
+                  if row.sum()>0:
+                      lista_values.append(int(row-sum(lista_values)))
+                      lista_index.append(index)
+                
+              fig, ax = plt.subplots(figsize=(20, 10))
+              fig.suptitle('Casos Corona Virus por dia no mundo', fontsize=15, color='#0c3c6e')
+    
+              plt.xlabel('Dia', fontsize=10)
+              plt.ylabel('Casos Por Dia', fontsize=10)
+            
+    
+              df_values=pd.DataFrame(index=lista_index)
+            
+              df_values['CasosDiarios']=lista_values
+              #print(df_values)
+              #df_values.index=self.pais_total.index
+              ax.bar(df_values.index,df_values[:]['CasosDiarios'])
+              start, end = ax.get_xlim()
+              ax.xaxis.set_ticks(np.arange(start, end, 3))
+              plt.xticks(rotation='vertical')
+              ax.grid()
+              fig.savefig('static/Casos_diarios.png')
 
 
 
