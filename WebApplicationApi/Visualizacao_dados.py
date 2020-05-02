@@ -126,13 +126,13 @@ class Global():
               CasosAtuais=confirmados_total-recuperados_total-mortes_total
               fig, ax = plt.subplots(figsize=(20, 10))
               
-              fig.suptitle('Visão Global', fontweight='bold',fontsize=15, color='#0c3c6e')
-              plt.xlabel('Dia', fontsize=20)
+              #fig.suptitle('Visão Global', fontweight='bold',fontsize=15, color='#0c3c6e')
+              #plt.xlabel('Dia', fontsize=20)
               plt.ylabel('Casos Atuais', fontsize=20)
               
               ax.plot(CasosAtuais,label="Ativos")
               ax.plot(confirmados_total,label='Confirmados')
-              ax.plot(recuperados_total,label='Recupeados')
+              ax.plot(recuperados_total,label='Recuperados')
               ax.plot(mortes_total,label="Mortes")
               ax.legend(fancybox=True, framealpha=1, shadow=True, borderpad=1,fontsize='15')
               start, end = ax.get_xlim()
@@ -156,10 +156,10 @@ class Global():
                       lista_index.append(index)
                 
               fig, ax = plt.subplots(figsize=(20, 10))
-              fig.suptitle('Casos Corona Virus por dia no mundo', fontsize=15, color='#0c3c6e')
+              #fig.suptitle('Casos Corona Virus por dia no mundo', fontsize=15, color='#0c3c6e')
     
-              plt.xlabel('Dia', fontsize=10)
-              plt.ylabel('Casos Por Dia', fontsize=10)
+              #plt.xlabel('Dia', fontsize=20)
+              plt.ylabel('Casos Por Dia', fontsize=20)
             
     
               df_values=pd.DataFrame(index=lista_index)
@@ -170,7 +170,9 @@ class Global():
               ax.bar(df_values.index,df_values[:]['CasosDiarios'])
               start, end = ax.get_xlim()
               ax.xaxis.set_ticks(np.arange(start, end, 3))
-              plt.xticks(rotation='vertical')
+              plt.xticks(rotation='vertical',fontsize=16)
+              plt.yticks(fontsize=16)
+
               ax.grid()
               fig.savefig('static/Casos_diarios.png')
 
@@ -209,8 +211,8 @@ class pais():
     def Graficos(self):
 
         fig, ax = plt.subplots(figsize=(20, 10))
-        fig.suptitle('Casos Corona Virus '+self.country, fontsize=30, fontweight='bold')
-        plt.xlabel('Dia', fontsize=20)
+        #fig.suptitle('Casos Corona Virus '+self.country, fontsize=30, fontweight='bold', color='#0c3c6e')
+        #plt.xlabel('Dia', fontsize=20)
         plt.ylabel('Casos Atuais', fontsize=20)
         ax.plot(self.pais_ativos,label="Ativos")
         ax.plot(self.pais_recuperados,label="Recuperados")
@@ -219,7 +221,8 @@ class pais():
         ax.legend(fancybox=True, framealpha=1, shadow=True, borderpad=1,fontsize='15')
         start, end = ax.get_xlim()
         ax.xaxis.set_ticks(np.arange(start, end, 3))
-        plt.xticks(rotation='vertical')
+        plt.xticks(rotation='vertical',fontsize=16)
+        plt.yticks(fontsize=16)
         ax.grid()
         fig.savefig('static/Activos.png')
         #plt.show()
@@ -236,10 +239,10 @@ class pais():
                 lista_index.append(index)
             
         fig, ax = plt.subplots(figsize=(20, 10))
-        fig.suptitle('Casos Corona Virus por dia em  '+self.country, fontsize=15, color='#0c3c6e')
+        #fig.suptitle('Casos Corona Virus por dia em  '+self.country,fontweight='bold', fontsize=30, color='#0c3c6e')
 
-        plt.xlabel('Dia', fontsize=10)
-        plt.ylabel('Casos Por Dia', fontsize=10)
+        #plt.xlabel('Dia', fontsize=20)
+        plt.ylabel('Casos Por Dia', fontsize=20)
         
 
         df_values=pd.DataFrame(index=lista_index)
@@ -250,7 +253,8 @@ class pais():
         ax.bar(df_values.index,df_values[:]['CasosDiarios'])
         start, end = ax.get_xlim()
         ax.xaxis.set_ticks(np.arange(start, end, 3))
-        plt.xticks(rotation='vertical')
+        plt.xticks(rotation='vertical',fontsize=16)
+        plt.yticks(fontsize=16)
         ax.grid()
         fig.savefig('static/Casos_diarios.png')
 

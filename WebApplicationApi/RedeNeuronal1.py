@@ -86,7 +86,11 @@ class LSTM():
         self.model.compile(loss=self.RMSE,optimizer=keras.optimizers.Adam(),metrics=['mae',self.RMSE])
         self.model.load_weights("model.h5")
         self.history = self.model.fit(x=self.X,y=self.Y,epochs=30,shuffle=False,verbose=False)
+<<<<<<< HEAD
         self.model.save_weights("model.h5")
+=======
+        #self.model.save_weights("model.h5")
+>>>>>>> 1e4e5fa29dbbbec8e0f280dcc11c2b5d49e1b5ac
     def Predict(self,data):
         result = self.model.predict(data,verbose=True)
         return result
@@ -129,13 +133,15 @@ class LSTM():
         self.PredictionGraph(predictions)
     def PredictionGraph(self,prediction):
         fig, ax = plt.subplots(figsize=(20, 10))
-        fig.suptitle('Previsao Casos ', fontsize=30, fontweight='bold')
+        fig.suptitle('Previsao Casos ', fontweight='bold',fontsize=30, color='#0c3c6e')
         plt.xlabel('Dia', fontsize=20)
         plt.ylabel('Previsão', fontsize=20)
         ax.plot(np.arange(len(self.df)),(self.df['Total_Cases']), label='Days Gone with real data')
-        ax.plot(np.arange(len(self.df),len(self.df) + len(prediction)),(prediction), label='10 days LSTM prediction')
+        ax.plot(np.arange(len(self.df),len(self.df) + len(prediction)),(prediction), label='50 days LSTM prediction')
         ax.legend(fancybox=True, framealpha=1, shadow=True, borderpad=1,fontsize='15')
-        #plt.xticks(self.df['Days_Gone'])
+        plt.xticks(fontsize=16)
+        plt.yticks(fontsize=16)
+              
         ax.grid()
         fig.savefig('static/lstm.png')
 
@@ -217,63 +223,7 @@ class Data():
         pd.DataFrame.to_csv(self.new_dataset,'Dados/new_dataset.csv',index=False)
 
 
-# In[6]:
 
-
-#data = Data()
-#data.PreparaData(confirmed_cases,confirmed_deaths,confirmed_recovered)
-#print(data.new_dataset)
-
-
-# In[7]:
-
-
-#model = LSTM(data.new_dataset)
-#model.Build(7,1)
-#data_norm,scaler=model.NormalizeData(data.new_dataset)
-#model.PrepareData(7)
-#print(scaler)
-
-# In[8]:
-
-
-#model.Fit()
-
-
-# In[15]:
-
-#print(scaler)
-#prediction = forecast(model,data.new_dataset,7,10,data_norm,scaler)
-# Denormalized = np.ndarray((1,4))
-# Denormalized[0][0] = -1
-# Denormalized[0][1] = -1
-# Denormalized[0][2] = prediction
-# Denormalized[0][3] = -1
-# Denormalized1 = np.transpose(Denormalized)
-# value = model.scaler.inverse_transform(Denormalized)
-# print(value)
-#print(prediction)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
