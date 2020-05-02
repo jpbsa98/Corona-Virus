@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#btn").click(function () {
+        $("#Create").toggle();
+    });
+});
+ </script>
 <style>
   * { box-sizing: border-box; }
 body {
@@ -47,11 +55,30 @@ input[type=submit] {
   /*when hovering an item:*/
   background-color: #e9e9e9;
 }
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #4CAF50;
+}
+
+​.chart-area1{
+float:right;
+height:auto;
+}​
+
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+
 
 
 </style>
@@ -82,9 +109,9 @@ input[type=submit] {
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-viruses"></i>
+          <i class="fas fa-virus"></i>
         </div>
         <div class="sidebar-brand-text mx-3">Corona <sup>Alert</sup></div>
       </a>
@@ -92,12 +119,6 @@ input[type=submit] {
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Menu</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -109,77 +130,68 @@ input[type=submit] {
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Global</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
+        <a class="nav-link" href="/">
+          <i class="fas fa-globe-europe"></i>
+          <span>Global</span></a>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Addons
+        Top Countries
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
+        <a class="nav-link" href="/?myCountry=US">
+          <i class="fas fa-flag-usa"></i>
+          <span>United States</span></a>
       </li>
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+        <a class="nav-link" href="/?myCountry=Spain">
+          <i class="fas fa-flag"></i>
+          <span>Spain</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+        <a class="nav-link" href="/?myCountry=Italy">
+          <i class="fas fa-flag"></i>
+          <span>Italy</span></a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/?myCountry=United Kingdom">
+          <i class="fas fa-flag"></i>
+          <span>United Kingdom</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/?myCountry=France">
+          <i class="fas fa-flag"></i>
+          <span>France</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/?myCountry=Brazil">
+          <i class="fas fa-flag"></i>
+          <span>Brazil</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/?myCountry=Portugal">
+          <i class="fas fa-flag"></i>
+          <span>Portugal</span></a>
+      </li>
+
+
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -352,11 +364,32 @@ input[type=submit] {
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">{{country}}</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-          </div>
+          
+          <h1>{{country}}</h1>
+          <!-- Predict bar toggle button -->
+          <div>
+            <button id = test onclick="myFunction()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Predict {{country}}</button>
+            <br>
+            <br>
+            <div id = "ContainerPredict"style="display:none">
+              <div id="myProgress" >    
+                <div id="myBar"></div>
+              </div>
+            </div>
 
+            <script type=text/javascript>
+              $(function() {
+                $('#test').bind('click', function() {
+                  $.getJSON('/Predict?Country={{country}}',
+                      function(data) {
+                    //do nothing
+                  });
+                  return false;
+                });
+            });
+            </script>
+            
+          </div>
           <!-- Content Row -->
           <div class="row">
 
@@ -368,6 +401,9 @@ input[type=submit] {
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Cases</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{value}}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-user-friends fa-3x" style="color:blue" ></i>
                     </div>
                   </div>
                 </div>
@@ -384,7 +420,7 @@ input[type=submit] {
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{value2}}</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      <i class="fas fa-heart fa-3x" style="color:green"></i>
                     </div>
                   </div>
                 </div>
@@ -399,6 +435,9 @@ input[type=submit] {
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Deaths</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{value3}}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-skull-crossbones fa-3x" style="color:red"></i>
                     </div>
                   </div>
                 </div>
@@ -415,7 +454,7 @@ input[type=submit] {
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{value4}}</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      <i class="far fa-frown fa-3x" style="color:yellow"></i>
                     </div>
                   </div>
                 </div>
@@ -436,10 +475,23 @@ input[type=submit] {
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="chart-area">
-                    <img src = "/static/Activos.png? + {{date}}" width="100%">
+                  <div class="chart-area1">
+                    <img src = "/static/{{img}}? + {{date}}" width="100%">
                   </div>
                 </div>
+              </div>
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Total Daily increase</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area1">
+                    <img src = "/static/Casos_diarios.png? + {{date}}" width="100%">
+                  </div>
+                </div>
+            
               </div>
             </div>
 
@@ -449,13 +501,6 @@ input[type=submit] {
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <img src = "/static/pizza.png? + {{date}} "width="100%">
-                </div>
-                <!-- Card Body -->
-              </div>
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <img src = "/static/Casos_diarios.png? + {{date}} "width="100%">
                 </div>
                 <!-- Card Body -->
               </div>
@@ -522,5 +567,35 @@ input[type=submit] {
   <script src="../static/js/demo/chart-pie-demo.js"></script>
 
 </body>
+
+<script>
+  var i = 0;
+  function myFunction() {
+    var x = document.getElementById("ContainerPredict");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+    if (i == 0) {
+      i = 1;
+      var elem = document.getElementById("myBar");
+      var width = 1;
+      var id = setInterval(frame, 150);
+      function frame() {
+        if (width >= 100) {
+          clearInterval(id);
+          i = 0;
+        } else {
+          width++;
+          elem.style.width = width + "%";
+        }
+      }
+    }
+    setTimeout(function(){
+            window.location.href = 'http://127.0.0.1:5000/?myCountry={{country}}&&prediction=1';
+         }, 15000);
+  }
+</script>
 
 </html>

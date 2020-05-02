@@ -12,6 +12,7 @@ from tensorflow import keras
 from datetime import datetime as dt
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
+import random
 
 # In[2]:
 
@@ -37,7 +38,7 @@ class LSTM():
     def NormalizeData(self):
         self.scaler = MinMaxScaler(feature_range=(-1, 1))
         self.normalized = self.scaler.fit_transform(self.df)
-        print(self.normalized)
+        #print(self.normalized)
         
     def Denormalize(self,dfNormalized):
         pass
@@ -56,9 +57,9 @@ class LSTM():
             i+=1
         self.X = np.array(self.X)
         self.Y = np.array(self.Y)
-        print(self.X)
+        #print(self.X)
         X = self.X
-        print(self.Y)
+        #print(self.Y)
         Y=self.Y
     
     '''
@@ -71,9 +72,10 @@ class LSTM():
     '''
     def Build(self,janela,nmr_parametros):
         self.model = keras.Sequential()
-        self.model.add(keras.layers.LSTM(16, input_shape=(janela, nmr_parametros), return_sequences=True))
-        self.model.add(keras.layers.LSTM(32, return_sequences=True))
-        self.model.add(keras.layers.LSTM(64, return_sequences=False))
+        self.model.add(keras.layers.LSTM(32, input_shape=(janela, nmr_parametros), return_sequences=True))
+        self.model.add(keras.layers.LSTM(64, return_sequences=True))
+        self.model.add(keras.layers.LSTM(128, return_sequences=False))
+        self.model.add(keras.layers.Dropout(0.2))
         self.model.add(keras.layers.Dense(32, activation="relu", kernel_initializer="uniform"))
         self.model.add(keras.layers.Dense(1, activation="linear"))
                        
@@ -82,14 +84,16 @@ class LSTM():
 
     def Fit(self):
         self.model.compile(loss=self.RMSE,optimizer=keras.optimizers.Adam(),metrics=['mae',self.RMSE])
-        self.history = self.model.fit(x=self.X,y=self.Y,epochs=150,shuffle=False,verbose=True)
+        self.model.load_weights("model.h5")
+        #self.history = self.model.fit(x=self.X,y=self.Y,epochs=30,shuffle=False,verbose=False)
+        #self.model.save_weights("model.h5")
     def Predict(self,data):
         result = self.model.predict(data,verbose=True)
         return result
         
     def forecast(self):
         timesteps= self.timesteps
-        multisteps=10
+        multisteps=50
         data_norm=pd.DataFrame(self.normalized)
         input_seq=data_norm[-timesteps:].values
         inp=input_seq[:,0]
@@ -98,22 +102,24 @@ class LSTM():
         predictions=list()
         
         inp = np.array(inp).astype('float32')
-        print(inp)
+        #print(inp)
         for step in range(1, multisteps+1):
             
             inp=inp.reshape(1,timesteps,1)
             
-            yhat=self.Predict(inp)
+            taxa_Erro = random.uniform(-0.005,0.005 )
+
+            yhat=self.Predict(inp) + taxa_Erro
             
             Denormalized = np.ndarray((1,4))
             Denormalized[0][0] = yhat
             Denormalized[0][1] = -1
             Denormalized[0][2] = -1
             Denormalized[0][3] = -1
-            print(self.scaler)
-            print(self.normalized)
+            #print(self.scaler)
+            #print(self.normalized)
             value = self.scaler.inverse_transform(Denormalized)
-            print(value)
+            #print(value)
             predictions.append(value[0][0])
             #predictions.append(yhat[0][0])
             inp=np.append(inp[0],yhat)
@@ -146,7 +152,10 @@ class Data():
         self.confirmed = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
         self.deaths = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
         self.recovered = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
-        self.PreparaData()
+        if(country == "World Wide"):
+            self.PreparaDataGlobal()
+        else:
+            self.PreparaData()
 
     def PreparaData(self):
         confirmedPortugal = self.confirmed[ self.confirmed['Country/Region'] != self.country].index
@@ -155,6 +164,32 @@ class Data():
         self.deaths.drop(deathsPortugal , inplace=True)
         recoveredPortugal = self.recovered[ self.recovered['Country/Region'] != self.country].index
         self.recovered.drop(recoveredPortugal , inplace=True)
+        self.confirmed = self.confirmed.drop(columns=['Province/State','Country/Region','Lat','Long'])
+        self.deaths = self.deaths.drop(columns=['Province/State','Country/Region','Lat','Long'])
+        self.recovered = self.recovered.drop(columns=['Province/State','Country/Region','Lat','Long'])
+        timesteps = []
+        total_infetados = []
+        total_Days = []
+        total_Deaths = []
+        total_Recovered = []
+        self.new_dataset = pd.DataFrame()
+        Ground_Zero = dt.strptime('12/31/19','%m/%d/%y')
+        for cols in self.confirmed.columns:
+            timesteps.append(cols)
+            total_infetados.append(self.confirmed[cols].sum())
+            current_date = dt.strptime(cols,'%m/%d/%y')
+            days_Gone = current_date - Ground_Zero
+            total_Days.append(int(days_Gone.days))
+        for cols in self.deaths.columns:
+            total_Deaths.append(self.deaths[cols].sum())
+        for cols in self.recovered.columns:
+            total_Recovered.append(self.recovered[cols].sum())
+        self.new_dataset['Total_Cases'] = total_infetados
+        self.new_dataset['Total_Recovered'] = total_Recovered
+        self.new_dataset['Total_Deaths'] = total_Deaths
+        self.new_dataset['Days_Gone'] = total_Days
+        pd.DataFrame.to_csv(self.new_dataset,'Dados/new_dataset.csv',index=False)
+    def PreparaDataGlobal(self):
         self.confirmed = self.confirmed.drop(columns=['Province/State','Country/Region','Lat','Long'])
         self.deaths = self.deaths.drop(columns=['Province/State','Country/Region','Lat','Long'])
         self.recovered = self.recovered.drop(columns=['Province/State','Country/Region','Lat','Long'])
