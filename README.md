@@ -53,11 +53,11 @@ Os csv&#39;s utilizados foram:
 # Corona Alert(Web Site)
 
 
-## Tutorial de utilização
+### Tutorial de utilização
 
-## Ambiente Anaconda
+#### Ambiente Anaconda
 
-## 1. Dependências
+##### 1. Dependências
 
 - conda install numpy
 - conda install matplotlib
@@ -66,21 +66,21 @@ Os csv&#39;s utilizados foram:
 - conda install Flask
 - conda install seaborn
 
-## 2. Adicionar o projeto ao Flask
+#### 2. Adicionar o projeto ao Flask
 
-### 2.1. Windows
+##### 2.1. Windows
 
 C:\path\to\app\set FLASK_APP=main.py
 
-### 2.2. Linux
+##### 2.2. Linux
 
 C:\path\to\app\export FLASK_APP=main.py
 
-## 3. Correr a aplicação
+#### 3. Correr a aplicação
 
 C:\path\to\app\flask run
 
-## 4. Abrir a aplicação
+#### 4. Abrir a aplicação
 
 Depois de correr a aplicação é necessário abrir o browser e colocar o seguinte endereço:
 
