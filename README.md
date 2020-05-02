@@ -34,7 +34,7 @@ Os objetivos estabelecidos para o trabalho são:
 
 Toda a base de dados foi obtida no seguinte github:
 
-[https://github.com/CSSEGISandData/COVID19/tree/master/csse\_covid\_19\_data/csse\_covid\_19\_time\_series](https://github.com/CSSEGISandData/COVID19/tree/master/csse_covid_19_data/csse_covid_19_time_series)
+[https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series](https://github.com/CSSEGISandData/COVID19/tree/master/csse_covid_19_data/csse_covid_19_time_series)
 
 Os csv&#39;s utilizados foram:
 
