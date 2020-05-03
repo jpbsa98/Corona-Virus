@@ -94,8 +94,8 @@ Depois de correr a aplicação é necessário abrir o browser e colocar o seguin
 - [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
 ### Funcionalidades
-O website construido permite aceder a todos os paises do mundo de modo dinamico e obter a totalidade de informaçoes sobre os casos de corona virus nesse pais, além de gráficos personalizados para cada pais, é possivel também efetuar uma previsão para cada pais individualmente e obter o gráfico de previsão.
-Deste modo o website permite obter uma experiencia inovadora e dinamica de interação com o nosso modelo LSTM e obter os resultados de modo simples e intuitivo
+O website construido permite aceder a todos os paises do mundo de modo dinámico e obter a totalidade de informações sobre os casos de corona virus nesse pais, além de gráficos personalizados para cada pais, é possivel também efetuar uma previsão para cada pais individualmente e obter o gráfico de previsão.
+Deste modo o website permite obter uma experiencia inovadora e dinámica de interação com o nosso modelo LSTM e obter os resultados de modo simples e intuitivo
 
 ### Interface
 ### Página Inicial
@@ -109,14 +109,14 @@ Deste modo o website permite obter uma experiencia inovadora e dinamica de inter
 #### Página personalizada por páis 
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country.PNG)
 
-### Pesquisa de paises dinamico
+### Pesquisa de paises dinámico
 #### O nosso website contém dados de mais de 200 paises.
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_dynamic_search.PNG)
 
 
 ### Previsão dos casos
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country_predicting.PNG)
-#### Gráficos dinamicos de previsão para todos os paises do mundo
+#### Gráficos dinámicos de previsão para todos os países do mundo
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country_predicted.PNG)
 
 
