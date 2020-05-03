@@ -75,15 +75,17 @@ Os csv&#39;s utilizados foram:
 
 ##### 2.1. Windows
 
-C:\path\to\app\set FLASK_APP=main.py
+cd C:\path\to\WEBapp\
+set FLASK_APP=main.py
 
 ##### 2.2. Linux
 
-C:\path\to\app\export FLASK_APP=main.py
+cd C:\path\to\WEBapp\
+export FLASK_APP=main.py
 
 #### 3. Correr a aplicação
 
-C:\path\to\app\flask run
+flask run
 
 #### 4. Abrir a aplicação
 
