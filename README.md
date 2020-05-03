@@ -99,4 +99,4 @@ Deste modo o website permite obter uma experiencia inovadora e dinamica de inter
 
 ### Interface
 
-![Drag Racing](Images/Website_country.png)
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide.PNG)
