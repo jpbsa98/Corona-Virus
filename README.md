@@ -70,6 +70,7 @@ Os csv&#39;s utilizados foram:
 - conda install Flask
 - conda install seaborn
 - conda install sklearn
+- conda install tensorflow
 #### 2. Adicionar o projeto ao Flask
 
 ##### 2.1. Windows
