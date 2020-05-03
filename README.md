@@ -100,6 +100,8 @@ Deste modo o website permite obter uma experiencia inovadora e dinamica de inter
 ### Interface
 ### Página Inicial
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide.PNG)
+
+#### Varios graficos disponiveis
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide2.PNG)
 
 
