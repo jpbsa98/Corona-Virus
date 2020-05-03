@@ -98,5 +98,20 @@ O website construido permite aceder a todos os paises do mundo de modo dinamico 
 Deste modo o website permite obter uma experiencia inovadora e dinamica de interação com o nosso modelo LSTM e obter os resultados de modo simples e intuitivo
 
 ### Interface
-
+#### Página Inicial
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide.PNG)
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide2.PNG)
+
+
+#### Página por páis, exemplo Portugal
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country.PNG)
+
+#### Pesquisa de paises dinamico
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_dynamic_search.PNG)
+
+
+#### Previsão dos casos
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country_predicting.PNG)
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country_predicted.PNG)
+
+
