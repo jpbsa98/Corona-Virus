@@ -86,9 +86,13 @@ class LSTM():
         self.model.compile(loss=self.RMSE,optimizer=keras.optimizers.Adam(),metrics=['mae',self.RMSE])
         self.model.load_weights("model.h5")
         self.history = self.model.fit(x=self.X,y=self.Y,epochs=30,shuffle=False,verbose=False)
+<<<<<<< HEAD
 
         #self.model.save_weights("model.h5")
 
+=======
+        self.model.save_weights("model.h5")
+>>>>>>> c2f6e0b987a4abd49a34ae8f784d4d32178cf7e3
     def Predict(self,data):
         result = self.model.predict(data,verbose=True)
         return result

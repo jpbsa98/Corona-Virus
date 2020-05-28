@@ -70,22 +70,53 @@ Os csv&#39;s utilizados foram:
 - conda install Flask
 - conda install seaborn
 - conda install sklearn
+- conda install tensorflow
 #### 2. Adicionar o projeto ao Flask
 
 ##### 2.1. Windows
 
-C:\path\to\app\set FLASK_APP=main.py
+cd C:\path\to\WEBapp\
+set FLASK_APP=main.py
 
 ##### 2.2. Linux
 
-C:\path\to\app\export FLASK_APP=main.py
+cd C:\path\to\WEBapp\
+export FLASK_APP=main.py
 
 #### 3. Correr a aplicação
 
-C:\path\to\app\flask run
+flask run
 
 #### 4. Abrir a aplicação
 
 Depois de correr a aplicação é necessário abrir o browser e colocar o seguinte endereço:
 
 - [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+
+### Funcionalidades
+O website construido permite aceder a todos os paises do mundo de modo dinámico e obter a totalidade de informações sobre os casos de corona virus nesse pais, além de gráficos personalizados para cada pais, é possivel também efetuar uma previsão para cada pais individualmente e obter o gráfico de previsão.
+Deste modo o website permite obter uma experiencia inovadora e dinámica de interação com o nosso modelo LSTM e obter os resultados de modo simples e intuitivo
+
+### Interface
+### Página Inicial
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide.PNG)
+
+#### Varios graficos disponiveis
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide2.PNG)
+
+
+### Página por páis, exemplo Portugal
+#### Página personalizada por páis 
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country.PNG)
+
+### Pesquisa de paises dinámico
+#### O nosso website contém dados de mais de 200 paises.
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_dynamic_search.PNG)
+
+
+### Previsão dos casos
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country_predicting.PNG)
+#### Gráficos dinámicos de previsão para todos os países do mundo
+![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country_predicted.PNG)
+
+
