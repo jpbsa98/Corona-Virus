@@ -31,7 +31,7 @@ def test():
         #previsoes = rede.LSTM()
         #previsoes.forecast()
 
-        return render_template('index.html',countries = data.paises,img = image,country=country,date = time.perf_counter(),value = max(dadosLocal.total),value3 = max(dadosLocal.pais_mortes),value2 = max(dadosLocal.pais_recuperados),value4 = max(dadosLocal.pais_ativos))
+        return render_template('index.html',countries = data.paises,img = image,country=country,date = time.perf_counter(),value = max(dadosLocal.total),value3 = max(dadosLocal.pais_mortes),value2 = max(dadosLocal.pais_recuperados),value4 = (dadosLocal.pais_ativos[-1]))
 
 
 @app.route('/Predict')
