@@ -198,7 +198,6 @@ class pais():
         df_pais_recuperados=recuperados_pais.loc[[self.country]]
         df_pais_mortes=mortes_pais.loc[[self.country]]
 
-
         df_pais_ativos.head()
 
         self.pais_ativos=df_pais_ativos.sum()
