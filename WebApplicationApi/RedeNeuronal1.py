@@ -31,7 +31,7 @@ class LSTM():
         self.df = pd.read_csv('Dados/new_dataset.csv')
         self.NormalizeData()
         self.timesteps = 15
-        self.nr_parametos=1
+        self.nr_parametos=2
         self.PrepareData(self.timesteps)
         self.Build(self.timesteps,self.nr_parametos)
         self.Fit()
@@ -52,8 +52,8 @@ class LSTM():
             input_index = i + timesteps
             label_index = input_index + 1
             if(label_index < len(self.normalized)):
-                self.X.append(self.normalized[i:input_index,0:1])
-                self.Y.append(self.normalized[input_index:label_index,0:1])
+                self.X.append(self.normalized[i:input_index,1:3])
+                self.Y.append(self.normalized[input_index:label_index,1:2])
             i+=1
         self.X = np.array(self.X)
         self.Y = np.array(self.Y)
@@ -85,8 +85,8 @@ class LSTM():
     def Fit(self):
         self.model.compile(loss=self.RMSE,optimizer=keras.optimizers.Adam(),metrics=['mae',self.RMSE])
         self.model.load_weights("model.h5")
-        self.history = self.model.fit(x=self.X,y=self.Y,epochs=30,shuffle=False,verbose=False)
-        self.model.save_weights("model.h5")
+        self.history = self.model.fit(x=self.X,y=self.Y,epochs=20,shuffle=False)
+        #self.model.save_weights("model.h5")
     def Predict(self,data):
         result = self.model.predict(data,verbose=True)
         return result
@@ -96,7 +96,7 @@ class LSTM():
         multisteps=50
         data_norm=pd.DataFrame(self.normalized)
         input_seq=data_norm[-timesteps:].values
-        inp=input_seq[:,0]
+        inp=input_seq[:,1:3]
         
         
         predictions=list()
@@ -105,25 +105,30 @@ class LSTM():
         #print(inp)
         for step in range(1, multisteps+1):
             
-            inp=inp.reshape(1,timesteps,1)
+            inp=inp.reshape(1,timesteps,2)
             
             taxa_Erro = random.uniform(-0.005,0.005 )
 
             yhat=self.Predict(inp) + taxa_Erro
             
-            Denormalized = np.ndarray((1,4))
-            Denormalized[0][0] = yhat
-            Denormalized[0][1] = -1
-            Denormalized[0][2] = -1
+            Denormalized = np.ndarray((1,7))
+            Denormalized[0][0] = -1
+            Denormalized[0][1] = yhat
+            Denormalized[0][2] = inp[0][inp.shape[1]-1][1]
             Denormalized[0][3] = -1
+            Denormalized[0][4] = -1
+            Denormalized[0][5] = -1
+            Denormalized[0][6] = -1
             #print(self.scaler)
             #print(self.normalized)
             value = self.scaler.inverse_transform(Denormalized)
             #print(value)
-            predictions.append(value[0][0])
+            predictions.append(value[0][1])
             #predictions.append(yhat[0][0])
-            inp=np.append(inp[0],yhat)
-            inp=inp[-timesteps:]
+            newCase = np.array((float(yhat),inp[0][inp.shape[1]-7][1]))  #
+            inp = np.append(inp, newCase)
+            inp = np.reshape(inp,(-1,2))
+            inp=inp[-timesteps:,:]
             #print(inp)
             
         self.PredictionGraph(predictions)
@@ -174,19 +179,28 @@ class Data():
         total_Days = []
         total_Deaths = []
         total_Recovered = []
+        daily_deaths=[]
+        daily_cases=[]
+        day_of_week=[]
         self.new_dataset = pd.DataFrame()
         Ground_Zero = dt.strptime('12/31/19','%m/%d/%y')
         for cols in self.confirmed.columns:
             timesteps.append(cols)
             total_infetados.append(self.confirmed[cols].sum())
             current_date = dt.strptime(cols,'%m/%d/%y')
+            day_of_week.append(current_date.weekday())
             days_Gone = current_date - Ground_Zero
             total_Days.append(int(days_Gone.days))
+            daily_cases.append(self.confirmed[cols].sum()-sum(daily_cases))
         for cols in self.deaths.columns:
             total_Deaths.append(self.deaths[cols].sum())
+            daily_deaths.append(self.deaths[cols].sum()-sum(daily_deaths))
         for cols in self.recovered.columns:
             total_Recovered.append(self.recovered[cols].sum())
         self.new_dataset['Total_Cases'] = total_infetados
+        self.new_dataset['Daily_Cases'] = daily_cases
+        self.new_dataset['WeekDay'] = day_of_week
+        self.new_dataset['Daily_Deaths'] = daily_deaths
         self.new_dataset['Total_Recovered'] = total_Recovered
         self.new_dataset['Total_Deaths'] = total_Deaths
         self.new_dataset['Days_Gone'] = total_Days
@@ -220,7 +234,8 @@ class Data():
 
 
 
-
-
+data = Data('US')
+lstm = LSTM()
+lstm.forecast()
 
 
