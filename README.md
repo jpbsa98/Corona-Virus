@@ -46,6 +46,9 @@ Os csv&#39;s utilizados foram:
 
 - [Análise dos dados](https://github.com/jpbsa98/Corona-Virus/blob/master/DataAnalysisNotebook.ipynb)
 
+## Preparação dos dados, construção do modelo Regressão Linear e Visualização dos resultados
+
+- [Contrução do modelo e visualização de resultados](https://github.com/jpbsa98/Corona-Virus/blob/master/TestesOutrosModelos.ipynb)
 
 ## Preparação dos dados, construção do modelo LSTM e Visualização dos resultados
 
@@ -55,13 +58,33 @@ Os csv&#39;s utilizados foram:
 
 - [Contrução do modelo e visualização de resultados](https://github.com/jpbsa98/Corona-Virus/blob/master/GRUPredictionsNotebook.ipynb)
 
-## Preparação dos dados, construção do modelo Regressão Linear e Visualização dos resultados
 
-- [Contrução do modelo e visualização de resultados](https://github.com/jpbsa98/Corona-Virus/blob/master/TestesOutrosModelos.ipynb)
 
 ## Análise de resultados
 
+Nesta secção vão ser analisados os modelos desenvolvidos ao longo do projeto. Além de analisar os resultados de cada um individualmente, irão ser feitas comparações entre os três modelos.
 
+### Regressão linear
+
+Os resultados obtidos na regressão linear não foram os desejados, o modelo mostrou dificuldade em efetuar previsões nos dias iniciais da pandemia acusando casos excessivos e consequentemente casos a menos nos casos finais. Uma melhor otimização dos hiperparâmetros no futuro poderia levar a melhores resultados.
+
+### LSTM's
+
+Outra abordagem que o grupo utilizou foi o uso de Redes Neuronais Recorrentes(RNN's) que são capazes de interpertar sequências temporais, no entanto devido ao tamanho limitado do nosso dataset as LSTM's podem ter dificuldades em atingir o seu potêncial.
+
+Os resultados mostraram-se bastante satisfatórios e superiores à regressão linear. Os resultados podem ser analisados em detalhe no - [Lstm Predictions](https://github.com/jpbsa98/Corona-Virus/blob/master/LstmPredictionsNotebook.ipynb).
+
+### GRU's
+
+Também nas redes RNN's e muito similares ás LSTM's existem as GRU's. As limitações encontradas para as LSTM's também se verificam nas GRU's e consequentemente os seus resultados foram bastante similares tanto na previsão de casos diários como na previsão de mortes. 
+
+Para uma melhor análise os resultados podem ser visualizados no - [Gru Predictions](https://github.com/jpbsa98/Corona-Virus/blob/master/GRUPredictionsNotebook.ipynb).
+
+### LSTM's vs GRU's
+
+![Previsão GRU's para os casos diários](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Gru_CasosDiarios.png)
+
+![Previsão LSTM's para os casos diários]](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Lstm_CasosDiarios.PNG)
 ## Corona Alert(Web Site)
 
 
