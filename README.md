@@ -82,9 +82,14 @@ Para uma melhor análise os resultados podem ser visualizados no - [Gru Predicti
 
 ### LSTM's vs GRU's
 
+#### Previsão GRU's para os casos diários
 ![Previsão GRU's para os casos diários](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Gru_CasosDiarios.png)
 
-![Previsão LSTM's para os casos diários]](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Lstm_CasosDiarios.PNG)
+#### Previsão LSTM's para os casos diários
+![Previsão LSTM's para os casos diários](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Lstm_CasosDiarios.PNG)
+
+Como se pode analisar, ambos os resultados são muito satisfatórios e equiparáveis entre eles. Para uma melhor análise comparar os resultados dos dois notebook's( previsão dos proximos 50 dias e previsão de mortes)
+
 ## Corona Alert(Web Site)
 
 
