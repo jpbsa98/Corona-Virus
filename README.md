@@ -109,12 +109,12 @@ Deste modo o website permite obter uma experiencia inovadora e dinámica de inte
 ### Página Inicial
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide.PNG)
 
-#### Varios graficos disponiveis
+#### Vários gráficos disponiveis
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_world_wide2.PNG)
 
 
-### Página por páis, exemplo Portugal
-#### Página personalizada por páis 
+### Página por país, exemplo Portugal
+#### Página personalizada por país 
 ![Website Preview](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Website_country.PNG)
 
 ### Pesquisa de paises dinámico
