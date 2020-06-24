@@ -75,7 +75,7 @@ Para uma melhor análise os resultados podem ser visualizados no - [Regressão L
 
 Outra abordagem que o grupo utilizou foi o uso de Redes Neuronais Recorrentes(RNN's) que são capazes de interpertar sequências temporais, no entanto devido ao tamanho limitado do nosso dataset as LSTM's podem ter dificuldades em atingir o seu potêncial.
 
-Os resultados mostraram-se bastante satisfatórios e superiores à regressão linear. Os resultados podem ser analisados em detalhe no - [Lstm Predictions](https://github.com/jpbsa98/Corona-Virus/blob/master/LstmPredictionsNotebook.ipynb).
+No entanto, os resultados mostraram-se bastante satisfatórios e superiores à regressão linear. Os resultados podem ser analisados em detalhe no - [Lstm Predictions](https://github.com/jpbsa98/Corona-Virus/blob/master/LstmPredictionsNotebook.ipynb).
 
 ### GRU's
 
