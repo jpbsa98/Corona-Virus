@@ -68,6 +68,9 @@ Nesta secção vão ser analisados os modelos desenvolvidos ao longo do projeto.
 
 Os resultados obtidos na regressão linear não foram os desejados, o modelo mostrou dificuldade em efetuar previsões nos dias iniciais da pandemia acusando casos excessivos e consequentemente casos a menos nos casos finais. Uma melhor otimização dos hiperparâmetros no futuro poderia levar a melhores resultados.
 
+Para uma melhor análise os resultados podem ser visualizados no - [Regressão Linear Predictions](https://github.com/jpbsa98/Corona-Virus/blob/master/TestesOutrosModelos.ipynb).
+
+
 ### LSTM's
 
 Outra abordagem que o grupo utilizou foi o uso de Redes Neuronais Recorrentes(RNN's) que são capazes de interpertar sequências temporais, no entanto devido ao tamanho limitado do nosso dataset as LSTM's podem ter dificuldades em atingir o seu potêncial.
@@ -80,7 +83,7 @@ Também nas redes RNN's e muito similares ás LSTM's existem as GRU's. As limita
 
 Para uma melhor análise os resultados podem ser visualizados no - [Gru Predictions](https://github.com/jpbsa98/Corona-Virus/blob/master/GRUPredictionsNotebook.ipynb).
 
-### LSTM's vs GRU's
+### GRU's vs LSTM's
 
 #### Previsão GRU's para os casos diários
 ![Previsão GRU's para os casos diários](https://github.com/jpbsa98/Corona-Virus/blob/master/Images/Gru_CasosDiarios.png)
