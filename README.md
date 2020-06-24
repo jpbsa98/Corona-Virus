@@ -54,6 +54,17 @@ Os csv&#39;s utilizados foram:
 
 - [Contrução do modelo e visualização de resultados](https://github.com/jpbsa98/Corona-Virus/blob/master/LstmPredictionsNotebook.ipynb)
 
+# Construção do modelo GRU e Visualização dos resultados
+
+- [Contrução do modelo e visualização de resultados](https://github.com/jpbsa98/Corona-Virus/blob/master/GRUPredictionsNotebook.ipynb)
+
+# Construção do modelo Regressão Linear e Visualização dos resultados
+
+- [Contrução do modelo e visualização de resultados](https://github.com/jpbsa98/Corona-Virus/blob/master/TestesOutrosModelos.ipynb)
+
+# Análise de resultados
+
+
 # Corona Alert(Web Site)
 
 
